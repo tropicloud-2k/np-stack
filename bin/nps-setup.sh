@@ -77,6 +77,7 @@ function nps_setup() {
 	openssl req -nodes -sha256 -newkey rsa:2048 -keyout app.key -out app.csr -config openssl.conf -batch
 	openssl rsa -in app.key -out app.key
 	openssl x509 -req -days 365 -in app.csr -signkey app.key -out app.crt	
+	openssl x509 -req -days 365 -sha256 -in app.csr -signkey app.key -out app.crt
 	rm -f openssl.conf
 	
 }
