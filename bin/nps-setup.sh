@@ -1,5 +1,6 @@
 function nps_setup() {
 
+	/usr/bin/chmod +x /usr/local/nps/np-stack
 	/usr/bin/ln -s /usr/local/nps/np-stack /usr/bin/nps
 	
 	# ------------------------

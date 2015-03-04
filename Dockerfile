@@ -1,9 +1,8 @@
 FROM centos:centos7
 MAINTAINER "Tropicloud" <admin@tropicloud.net>
 
-
 ADD . /usr/local/nps
-RUN /usr/bin/chmod +x /usr/local/nps/np-stack && /bin/bash /usr/local/nps/np-stack setup
+RUN /bin/bash /usr/local/nps/np-stack setup
 
 EXPOSE 80 443
 ENTRYPOINT ["nps"]
