@@ -1,5 +1,7 @@
 function nps_setup() {
 
+	/usr/bin/ln -s /usr/local/nps/np-stack /usr/bin/nps
+	
 	# ------------------------
 	# REPOS
 	# ------------------------
