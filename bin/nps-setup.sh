@@ -1,11 +1,6 @@
 function nps_setup() {
 
-	# ------------------------
-	# NPS
-	# ------------------------
-	
-	chmod +x /usr/local/nps/np-stack
-	ln -s /usr/local/nps/np-stack /usr/bin/nps
+	chmod +x /usr/local/nps/np-stack && ln -s /usr/local/nps/np-stack /usr/bin/nps
 	
 	# ------------------------
 	# REPOS
