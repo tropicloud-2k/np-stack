@@ -1,7 +1,11 @@
 function nps_setup() {
 
-	/usr/bin/chmod +x /usr/local/nps/np-stack
-	/usr/bin/ln -s /usr/local/nps/np-stack /usr/bin/nps
+	# ------------------------
+	# NPS
+	# ------------------------
+	
+	chmod +x /usr/local/nps/np-stack
+	ln -s /usr/local/nps/np-stack /usr/bin/nps
 	
 	# ------------------------
 	# REPOS
@@ -49,11 +53,11 @@ function nps_setup() {
 	easy_install supervisor-stdout
 	
 	## WP-CLI
-	wget -O /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+	wget -nv -O /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 	chmod +x /usr/local/bin/wp
 	
 	## JQ 
-	wget -O /usr/local/bin/jq http://stedolan.github.io/jq/download/linux64/jq
+	wget -nv -O /usr/local/bin/jq http://stedolan.github.io/jq/download/linux64/jq
 	chmod +x /usr/local/bin/jq
 	
 	# ------------------------
