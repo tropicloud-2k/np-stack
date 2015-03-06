@@ -5,5 +5,4 @@ ADD . /usr/local/nps
 RUN /bin/bash /usr/local/nps/np-stack setup
 
 EXPOSE 80 443
-ENTRYPOINT ["nps"]
-CMD ["start","-i"]
+CMD ["nps",start","-i"]
