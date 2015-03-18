@@ -1,20 +1,21 @@
 function nps_start() {
 	
-	if [[  $2 == "-i"  ]]; then
+	nps_environment
+
+	if [[  -f /tmp/supervisord.pid  ]]; then
 	
-		if [[  ! -f '/var/log/php-fpm.log'  ]]; then touch /var/log/php-fpm.log; fi
-		if [[  ! -f '/var/log/nginx.log'    ]]; then touch /var/log/nginx.log; fi
-		
-		nps_environment
-		
-		/usr/bin/supervisord -n -c /etc/supervisord.conf
+		if [[  -z $2  ]];
+		then /usr/bin/supervisorctl start all;
+		else /usr/bin/supervisorctl start $2;
+		fi
 		
 	else
+	
+		if [[  ! -f "/var/log/php-fpm.log"  ]]; then touch /var/log/php-fpm.log; fi
+		if [[  ! -f "/var/log/nginx.log"  ]];   then touch /var/log/nginx.log; fi
 		
-		if [[  -z $2  ]]; then process="all"; else process="$2"; fi
-		
-		/usr/bin/supervisorctl start $process
-		
+		exec /usr/bin/supervisord -n -c /etc/supervisord.conf
+	
 	fi
 	
 }
