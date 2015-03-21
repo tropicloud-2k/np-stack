@@ -1,14 +1,6 @@
 function nps_setup() {
 
-	# ------------------------
-	# NPS
-	# ------------------------
-	
 	chmod +x /usr/local/nps/np-stack && ln -s /usr/local/nps/np-stack /usr/bin/nps
-	
-	useradd -g nginx -d $home -s /bin/false np-stack
-	echo "source /etc/environment" >> $home/.bashrc
-	chown root:root $home && chmod 755 $home
 
 	# ------------------------
 	# REPOS
@@ -89,6 +81,14 @@ function nps_setup() {
 	openssl x509 -req -days 365 -sha256 -in app.csr -signkey app.key -out app.crt
 	rm -f openssl.conf
 	
+	# ------------------------
+	# CHROOT USER
+	# ------------------------
+		
+	useradd -g nginx -d $home -s /bin/false np-stack
+	echo "source /etc/environment" >> $home/.bashrc
+	chown root:root $home && chmod 755 $home
+
 	# ------------------------
 	# FIX PERMISSIONS
 	# ------------------------
