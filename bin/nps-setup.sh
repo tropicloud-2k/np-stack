@@ -1,7 +1,15 @@
 function nps_setup() {
 
+	# ------------------------
+	# NPS
+	# ------------------------
+	
 	chmod +x /usr/local/nps/np-stack && ln -s /usr/local/nps/np-stack /usr/bin/nps
 	
+	useradd -g nginx -d $home -s /bin/false np-stack
+	echo "source /etc/environment" >> $home/.bashrc
+	chown root:root $home && chmod 755 $home
+
 	# ------------------------
 	# REPOS
 	# ------------------------
@@ -59,21 +67,21 @@ function nps_setup() {
 	# CONFIG
 	# ------------------------
 
-	mkdir -p /app/html
-	mkdir -p /app/ssl
+	mkdir -p $home/html
+	mkdir -p $home/ssl
 			
 	cat $nps/conf/supervisor/supervisord.conf > /etc/supervisord.conf
 	cat $nps/conf/nginx/default.conf > /etc/nginx/conf.d/default.conf
 	cat $nps/conf/php/php-fpm.conf > /etc/php-fpm.d/www.conf
 	cat $nps/conf/nginx/nginx.conf > /etc/nginx/nginx.conf
-	cat $nps/conf/html/index.html > /app/html/index.html
-	cat $nps/conf/html/info.php > /app/html/info.php
+	cat $nps/conf/html/index.html > $home/html/index.html
+	cat $nps/conf/html/info.php > $home/html/info.php
 
 	# ------------------------
 	# SSL CERT.
 	# ------------------------
 	
-	cd /app/ssl
+	cd $home/ssl
 	
 	cat $nps/conf/nginx/openssl.conf > openssl.conf
 	openssl req -nodes -sha256 -newkey rsa:2048 -keyout app.key -out app.csr -config openssl.conf -batch
@@ -81,4 +89,9 @@ function nps_setup() {
 	openssl x509 -req -days 365 -sha256 -in app.csr -signkey app.key -out app.crt
 	rm -f openssl.conf
 	
+	# ------------------------
+	# FIX PERMISSIONS
+	# ------------------------
+
+	chown np-stack:nginx -R $home && chmod 755 -R $home
 }
