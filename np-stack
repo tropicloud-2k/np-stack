@@ -7,7 +7,7 @@
 # version: 0.3
 # ------------------------------------
 
-nps='/usr/local/nps' && home='/home/np-stack'
+nps='/usr/local/nps' && home='/app'
 
 # ------------------------------------
 # NP-STACK Functions

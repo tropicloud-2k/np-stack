@@ -56,12 +56,20 @@ function nps_setup() {
 	chmod +x /usr/local/bin/jq
 	
 	# ------------------------
-	# CONFIG
+	# CHROOT USER
 	# ------------------------
+		
+	useradd -g nginx -d $home -s /bin/false npstack
+	echo "source /etc/environment" >> $home/.bashrc
+	chown root:root $home && chmod 755 $home
 
 	mkdir -p $home/html
 	mkdir -p $home/ssl
-			
+		
+	# ------------------------
+	# CONFIG
+	# ------------------------
+
 	cat $nps/conf/supervisor/supervisord.conf > /etc/supervisord.conf
 	cat $nps/conf/nginx/default.conf > /etc/nginx/conf.d/default.conf
 	cat $nps/conf/php/php-fpm.conf > /etc/php-fpm.d/www.conf
@@ -82,16 +90,8 @@ function nps_setup() {
 	rm -f openssl.conf
 	
 	# ------------------------
-	# CHROOT USER
-	# ------------------------
-		
-	useradd -g nginx -d $home -s /bin/false np-stack
-	echo "source /etc/environment" >> $home/.bashrc
-	chown root:root $home && chmod 755 $home
-
-	# ------------------------
 	# FIX PERMISSIONS
 	# ------------------------
 
-	chown np-stack:nginx -R $home && chmod 755 -R $home
+	chown npstack:nginx -R $home/* && chmod 755 -R $home/*
 }
