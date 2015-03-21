@@ -22,6 +22,7 @@ elif [[  $1 == 'restart'  ]];  then nps_restart $@
 elif [[  $1 == 'reload'  ]];   then nps_reload $@
 elif [[  $1 == 'status'  ]];   then nps_status $@
 elif [[  $1 == 'log'  ]];      then nps_log $@
+elif [[  $1 == 'login'  ]];    then nps_login $@
 
 # ------------------------------------
 # NP-STACK Commands
