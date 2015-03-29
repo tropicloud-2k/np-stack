@@ -1,13 +1,11 @@
 np_setup() {
 
-	chmod +x /usr/local/nps/np-stack && ln -s /usr/local/nps/np-stack /usr/bin/np
-
 	# ------------------------
 	# REPOS
 	# ------------------------
 	
 	## NGINX
-	cat $nps/conf/yum/nginx.repo > /etc/yum.repos.d/nginx.repo
+	cat $nps/etc/yum/nginx.repo > /etc/yum.repos.d/nginx.repo
 	
 	## EPEL
 	rpm -Uvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
@@ -31,6 +29,7 @@ np_setup() {
 	               php-common \
 	               php-opcache \
 	               php-pecl-apcu \
+	               php-gd \
 	               php-cli \
 	               php-pear \
 	               php-pdo \
@@ -40,8 +39,9 @@ np_setup() {
 	               php-pecl-sqlite \
 	               php-pecl-memcache \
 	               php-pecl-memcached \
-	               php-gd php-mbstring \
-	               php-mcrypt php-xml
+	               php-mbstring \
+	               php-mcrypt \
+	               php-xml
 	               
 	## Supervisor
 	easy_install supervisor
@@ -56,7 +56,7 @@ np_setup() {
 	chmod +x /usr/local/bin/jq
 	
 	# ------------------------
-	# CHROOT USER
+	# CONFIG
 	# ------------------------
 		
 	useradd -g nginx -d $home -s /bin/false npstack
@@ -66,32 +66,34 @@ np_setup() {
 	mkdir -p $home/html
 	mkdir -p $home/ssl
 		
-	# ------------------------
-	# CONFIG
-	# ------------------------
-
-	cat $nps/conf/supervisor/supervisord.conf > /etc/supervisord.conf
-	cat $nps/conf/nginx/default.conf > /etc/nginx/conf.d/default.conf
-	cat $nps/conf/php/php-fpm.conf > /etc/php-fpm.d/www.conf
-	cat $nps/conf/nginx/nginx.conf > /etc/nginx/nginx.conf
-	cat $nps/conf/html/index.html > $home/html/index.html
-	cat $nps/conf/html/info.php > $home/html/info.php
+	cat $nps/etc/supervisor/supervisord.conf > /etc/supervisord.conf
+	cat $nps/etc/nginx/default.conf > /etc/nginx/conf.d/default.conf
+	cat $nps/etc/php/php-fpm.conf > /etc/php-fpm.d/www.conf
+	cat $nps/etc/nginx/nginx.conf > /etc/nginx/nginx.conf
+	cat $nps/etc/html/index.html > $home/html/index.html
+	cat $nps/etc/html/info.php > $home/html/info.php
 
 	# ------------------------
-	# SSL CERT.
+	# SSL
 	# ------------------------
 	
 	cd $home/ssl
 	
-	cat $nps/conf/nginx/openssl.conf > openssl.conf
+	cat $nps/etc/nginx/openssl.conf > openssl.conf
+	
 	openssl req -nodes -sha256 -newkey rsa:2048 -keyout app.key -out app.csr -config openssl.conf -batch
 	openssl rsa -in app.key -out app.key
 	openssl x509 -req -days 365 -sha256 -in app.csr -signkey app.key -out app.crt
+	
 	rm -f openssl.conf
 	
 	# ------------------------
-	# FIX PERMISSIONS
+	# CHMOD
 	# ------------------------
 
-	chown npstack:nginx -R $home/* && chmod 770 -R $home/*
+	chmod +x /usr/local/nps/np-stack
+	ln -s /usr/local/nps/np-stack /usr/bin/np
+	
+	chown npstack:nginx -R $home/*
+	chmod 770 -R $home/*
 }
