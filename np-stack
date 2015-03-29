@@ -15,14 +15,14 @@ nps='/usr/local/nps' && home='/app'
 
 for f in $nps/bin/*; do . $f; done
 
-  if [[  $1 == 'setup'  ]];    then nps_setup $@
-elif [[  $1 == 'start'  ]];    then nps_start $@
-elif [[  $1 == 'stop'  ]];     then nps_stop $@
-elif [[  $1 == 'restart'  ]];  then nps_restart $@
-elif [[  $1 == 'reload'  ]];   then nps_reload $@
-elif [[  $1 == 'status'  ]];   then nps_status $@
-elif [[  $1 == 'log'  ]];      then nps_log $@
-elif [[  $1 == 'login'  ]];    then nps_login $@
+  if [[  $1 == 'setup'  ]];    then np_setup $@
+elif [[  $1 == 'start'  ]];    then np_start $@
+elif [[  $1 == 'stop'  ]];     then np_stop $@
+elif [[  $1 == 'restart'  ]];  then np_restart $@
+elif [[  $1 == 'reload'  ]];   then np_reload $@
+elif [[  $1 == 'status'  ]];   then np_status $@
+elif [[  $1 == 'log'  ]];      then np_log $@
+elif [[  $1 == 'login'  ]];    then np_login $@
 
 # ------------------------------------
 # NP-STACK Commands

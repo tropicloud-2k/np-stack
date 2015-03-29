@@ -1,6 +1,6 @@
-function nps_setup() {
+np_setup() {
 
-	chmod +x /usr/local/nps/np-stack && ln -s /usr/local/nps/np-stack /usr/bin/nps
+	chmod +x /usr/local/nps/np-stack && ln -s /usr/local/nps/np-stack /usr/bin/np
 
 	# ------------------------
 	# REPOS
@@ -93,5 +93,5 @@ function nps_setup() {
 	# FIX PERMISSIONS
 	# ------------------------
 
-	chown npstack:nginx -R $home/* && chmod 755 -R $home/*
+	chown npstack:nginx -R $home/* && chmod 770 -R $home/*
 }

@@ -1,10 +1,10 @@
 # ------------------------
-# NPS START
+# NP START
 # ------------------------
 
-function nps_start() {
+np_start() {
 	
-	nps_environment
+	np_environment
 
 	if [[  -f /tmp/supervisord.pid  ]]; then
 	
@@ -24,10 +24,10 @@ function nps_start() {
 }
 
 # ------------------------
-# NPS STOP
+# NP STOP
 # ------------------------
 
-function nps_stop() {
+np_stop() {
 
 	if [[  -f /tmp/supervisord.pid  ]]; then
 	
@@ -40,12 +40,12 @@ function nps_stop() {
 }
 
 # ------------------------
-# NPS RESTART
+# NP RESTART
 # ------------------------
 
-function nps_restart() {
+np_restart() {
 	
-	nps_environment
+	np_environment
 
 	if [[  -f /tmp/supervisord.pid  ]]; then
 	
@@ -59,12 +59,12 @@ function nps_restart() {
 }
 
 # ------------------------
-# NPS RELOAD
+# NP RELOAD
 # ------------------------
 
-function nps_reload() {
+np_reload() {
 
-	nps_environment
+	np_environment
 
 	if [[  -f /tmp/supervisord.pid  ]];
 	then /usr/bin/supervisorctl reload;
@@ -72,10 +72,10 @@ function nps_reload() {
 }
 
 # ------------------------
-# NPS STATUS
+# NP STATUS
 # ------------------------
 
-function nps_status() {
+np_status() {
 	
 	if [[  -f /tmp/supervisord.pid  ]]; then
 	
@@ -88,10 +88,10 @@ function nps_status() {
 }
 
 # ------------------------
-# NPS LOG
+# NP LOG
 # ------------------------
 
-function nps_log() {
+np_log() {
 
 	if [[  -f /tmp/supervisord.pid  ]];
 	then /usr/bin/supervisorctl maintail;
@@ -99,12 +99,12 @@ function nps_log() {
 }
 
 # ------------------------
-# NPS LOGIN
+# NP LOGIN
 # ------------------------
 
-function nps_login() {
+np_login() {
 
 	export TERM=xterm
-	su -l npstack -s /bin/bash
+	su -l nptack -s /bin/bash
 
 }
