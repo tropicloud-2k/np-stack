@@ -63,6 +63,14 @@ np_setup() {
 	echo "source /etc/environment" >> $home/.bashrc
 	chown root:root $home && chmod 755 $home
 
+	cat >> $home/.profile <<"EOF"
+for var in $(cat /etc/environment); do 
+	key=$(echo $var | cut -d= -f1)
+	val=$(echo $var | cut -d= -f2)
+	export ${key}=${val}
+done
+EOF
+
 	mkdir -p $home/html
 	mkdir -p $home/ssl
 		
@@ -94,6 +102,7 @@ np_setup() {
 	chmod +x /usr/local/nps/np-stack
 	ln -s /usr/local/nps/np-stack /usr/bin/np
 	
-	chown npstack:nginx -R $home/*
-	chmod 770 -R $home/*
+	cd $home
+	
+	chown npstack:nginx -R . && chmod -R 775 .
 }
