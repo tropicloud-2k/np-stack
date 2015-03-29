@@ -53,13 +53,13 @@ np_environment() {
 	else mkdir -p /etc/env
 	fi
 
-	cat $nps/etc/php/php-fpm.conf > /etc/php/php-fpm.conf
+	cat $nps/etc/php/php-fpm.conf > /etc/php-fpm.d/www.conf
 
 	for var in $(cat /etc/environment); do 
 		key=$(echo $var | cut -d= -f1)
 		val=$(echo $var | cut -d= -f2)
 		echo -ne $val > /etc/env/${key}
-		echo -e "env[$key] = '$val'" >> /etc/php/php-fpm.conf
+		echo -e "env[$key] = '$val'" >> /etc/php-fpm.d/www.conf
 	done
 	
 	chown root:nginx /etc/environment && chmod 770 /etc/environment
