@@ -1,4 +1,4 @@
-np_env() {
+np_environment() {
 	
 	# ------------------------
 	# DATABASE
