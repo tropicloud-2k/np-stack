@@ -75,12 +75,13 @@ EOF
 	mkdir -p $home/html
 	mkdir -p $home/ssl
 		
-	cat $nps/etc/supervisor/supervisord.conf > /etc/supervisord.conf
-	cat $nps/etc/nginx/default.conf > /etc/nginx/conf.d/default.conf
-	cat $nps/etc/php/php-fpm.conf > /etc/php-fpm.d/www.conf
+	cat $nps/etc/supervisord.conf > /etc/supervisord.conf
+	cat $nps/etc/php/php-fpm.conf > /etc/php/php-fpm.conf
 	cat $nps/etc/nginx/nginx.conf > /etc/nginx/nginx.conf
-	cat $nps/etc/html/index.html > $home/html/index.html
-	cat $nps/etc/html/info.php > $home/html/info.php
+	cat $nps/etc/nginx/app.conf   > /app/app.conf
+
+	cat $nps/etc/html/index.html  > $home/html/index.html
+	cat $nps/etc/html/info.php    > $home/html/info.php
 
 	# ------------------------
 	# SSL
@@ -105,5 +106,8 @@ EOF
 	
 	cd $home
 	
-	chown npstack:nginx -R . && chmod -R 775 .
+	chown npstack:nginx -R .
+	chmod -R 775 .
+	
+	chmod 644 $home/app.conf
 }
