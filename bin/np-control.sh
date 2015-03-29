@@ -127,8 +127,7 @@ np_login() {
 
 np_root() {
 
-	export TERM=xterm
-	su -l npstack -s /bin/bash
+	export TERM=xterm && np status && /bin/bash
 
 }
 
