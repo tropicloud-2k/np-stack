@@ -105,6 +105,6 @@ np_log() {
 np_login() {
 
 	export TERM=xterm
-	su -l nptack -s /bin/bash
+	su -l npstack -s /bin/bash
 
 }
