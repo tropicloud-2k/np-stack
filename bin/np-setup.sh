@@ -60,10 +60,11 @@ np_setup() {
 	# ------------------------
 		
 	useradd -g nginx -d $home -s /bin/false npstack
-	echo "source /etc/environment" >> $home/.bashrc
 	chown root:root $home && chmod 755 $home
 
-	cat >> $home/.profile <<"EOF"
+	cat >> $home/.bashrc <<"EOF"
+
+# NP Environment
 for var in $(cat /etc/environment); do 
 	key=$(echo $var | cut -d= -f1)
 	val=$(echo $var | cut -d= -f2)
