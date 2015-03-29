@@ -109,3 +109,15 @@ np_login() {
 	su -l npstack -s /bin/bash
 
 }
+
+# ------------------------
+# NP ROOT
+# ------------------------
+
+np_root() {
+
+	export TERM=xterm
+	su -l npstack -s /bin/bash
+
+}
+

@@ -62,9 +62,7 @@ np_setup() {
 	useradd -g nginx -d $home -s /bin/false npstack
 	chown root:root $home && chmod 755 $home
 
-	cat >> $home/.bashrc <<"EOF"
-
-# NP Environment
+	cat >> /root/.bashrc <<"EOF"
 for var in $(cat /etc/environment); do 
 	key=$(echo $var | cut -d= -f1)
 	val=$(echo $var | cut -d= -f2)
@@ -76,12 +74,12 @@ EOF
 	mkdir -p $home/ssl
 		
 	cat $nps/etc/supervisord.conf > /etc/supervisord.conf
-	cat $nps/etc/php/php-fpm.conf > /etc/php/php-fpm.conf
+	cat $nps/etc/php/php-fpm.conf > /etc/php-fpm.d/www.conf
 	cat $nps/etc/nginx/nginx.conf > /etc/nginx/nginx.conf
-	cat $nps/etc/nginx/app.conf   > /app/app.conf
-
+	cat $nps/etc/nginx/app.conf   > $home/app.conf
 	cat $nps/etc/html/index.html  > $home/html/index.html
 	cat $nps/etc/html/info.php    > $home/html/info.php
+	cat /root/.bashrc             > $home/.bashrc
 
 	# ------------------------
 	# SSL

@@ -23,6 +23,7 @@ elif [[  $1 == 'reload'  ]];   then np_reload $@
 elif [[  $1 == 'status'  ]];   then np_status $@
 elif [[  $1 == 'log'  ]];      then np_log $@
 elif [[  $1 == 'login'  ]];    then np_login $@
+elif [[  $1 == 'root'  ]];     then np_root $@
 
 # ------------------------------------
 # NP-STACK Commands
