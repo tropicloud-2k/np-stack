@@ -20,6 +20,7 @@ elif [[  $1 == 'start'  ]];    then np_start $@
 elif [[  $1 == 'stop'  ]];     then np_stop $@
 elif [[  $1 == 'restart'  ]];  then np_restart $@
 elif [[  $1 == 'reload'  ]];   then np_reload $@
+elif [[  $1 == 'shutdown'  ]]; then np_shutdown $@
 elif [[  $1 == 'status'  ]];   then np_status $@
 elif [[  $1 == 'log'  ]];      then np_log $@
 elif [[  $1 == 'login'  ]];    then np_login $@
@@ -36,16 +37,19 @@ else echo "
 
   HOW TO USE:
   
-  nps start                 # Start all processes
-  nps start <name>          # Start a specific process
-  nps stop                  # Stop all processes
-  nps stop <name>           # Stop a specific process
-  nps restart               # Restart all processes
-  nps restart <name>        # Restart a specific process
-  nps status                # Get status for all processes
-  nps status <name>         # Get status for a single process
-  nps log                   # Display last 1600 *bytes* of main log file
-  nps reload                # Restart Supervisord
+  np start                 # Start all processes
+  np start <name>          # Start a specific process
+  np stop                  # Stop all processes
+  np stop <name>           # Stop a specific process
+  np status                # Get status for all processes
+  np status <name>         # Get status for a single process
+  np restart               # Restart all processes
+  np restart <name>        # Restart a specific process
+  np reload                # Restart Supervisord
+  np shutdown              # Stop the container
+  np log                   # Display last 1600 *bytes* of main log file
+  np login                 # Login as npstack user
+  np root                  # Login as root
 
 ----------------------------------------------------  
 

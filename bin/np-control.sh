@@ -73,6 +73,17 @@ np_reload() {
 }
 
 # ------------------------
+# NP SHUTDOWN
+# ------------------------
+
+np_shutdown() {
+
+	if [[  -f /tmp/supervisord.pid  ]];
+	then /usr/bin/supervisorctl shutdown;
+	fi
+}
+
+# ------------------------
 # NP STATUS
 # ------------------------
 

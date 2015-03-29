@@ -6,15 +6,15 @@ For database connection you may read:
 * [Container Linking](https://docs.docker.com/userguide/dockerlinks/#docker-container-linking)
 * [MariaDB](https://registry.hub.docker.com/_/mariadb/)
 
-#### Build from GitHub
-    git clone https://github.com/tropicloud/np-stack.git
-    docker build -t tropicloud/np-stack np-stack
+#### Pull from Docker Hub
+    docker pull tropicloud/np-stack
     
 
 or
 
-#### Pull from Docker Hub
-    docker pull tropicloud/np-stack
+#### Build from GitHub
+    git clone https://github.com/tropicloud/np-stack.git
+    docker build -t tropicloud/np-stack np-stack
     
 
 then
